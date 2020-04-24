@@ -1,0 +1,67 @@
+#Eclipse
+.metadata
+.settings
+.project*
+.classpath
+HELP.md
+
+#Java
+#https://labs.consol.de/development/git/2017/02/22/gitignore.html
+target/
+target
+/target
+/target/
+*.class
+
+
+#Maven
+mvn/
+mvn
+/mvn
+/mvn/
+.mvn
+mvnw
+mvnw.cmd
+
+#Visual Studio Code
+.editorconfig
+.vscode
+node_modules/
+node_modules
+/node_modules
+/node_modules/
+.bin/
+
+#From Spring Initializer
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
