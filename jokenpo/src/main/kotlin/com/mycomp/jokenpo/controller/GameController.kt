@@ -13,10 +13,7 @@ class GameController(private val userService: GameService) {
     @GetMapping("/playwithall")
     fun getGameWithAll(): User? = userService.playGameWithAll()
 
-
     @RequestMapping(value = ["/playwithsome/{ids}"], method = [RequestMethod.GET])
-    @ResponseBody
-    fun getGameWithSome(@PathVariable ids: Array<Long?>?): String? {
-        return "Dummy"
-    }
+    fun getGameWithSome(@PathVariable ids: Array<Long?>): User? = userService.playGameWithSome(ids)
+
 }

@@ -5,11 +5,12 @@ import com.mycomp.jokenpo.enums.PlayType
 import com.mycomp.jokenpo.model.User
 import com.mycomp.jokenpo.respository.UserRepository
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class GameService(private val userRepository: UserRepository) {
 
-    fun returnWinnerBetweenTwoPlayers(u1: User, u2: User): User {
+    private fun returnWinnerBetweenTwoPlayers(u1: User, u2: User): User {
 
         when (u1.play) {
             PlayType.SPOCK -> when (u2.play) {
@@ -56,18 +57,50 @@ class GameService(private val userRepository: UserRepository) {
         return u1
     }
 
-    fun playGameWithAll(): User? {
-        val allUsers = userRepository.findAll().toList()
-
-        val winner = allUsers.reduce { a, b ->
+    private fun playGame(users: List<User>): User?{
+        val winner = users.reduce { a, b ->
             returnWinnerBetweenTwoPlayers(a, b)
         }
 
-        if (allUsers.filter { player -> player.play == winner.play }
+        if (users.filter { player -> player.play == winner.play }
                         .count() == 1)
             return winner
         else
             return null
+    }
+
+    fun playGameWithAll(): User? {
+        val allUsers = userRepository.findAll().toList()
+
+        return playGame(allUsers)
+
+//        val winner = allUsers.reduce { a, b ->
+//            returnWinnerBetweenTwoPlayers(a, b)
+//        }
+//
+//        if (allUsers.filter { player -> player.play == winner.play }
+//                        .count() == 1)
+//            return winner
+//        else
+//            return null
+
+    }
+
+    fun playGameWithSome(ids: Array<Long?>): User? {
+
+        val someUsers = userRepository.findAllById(ids.asIterable()).toList()
+
+        return playGame(someUsers)
+
+//        val winner = allUsers.reduce { a, b ->
+//            returnWinnerBetweenTwoPlayers(a, b)
+//        }
+//
+//        if (allUsers.filter { player -> player.play == winner.play }
+//                        .count() == 1)
+//            return winner
+//        else
+//            return null
 
     }
 }
