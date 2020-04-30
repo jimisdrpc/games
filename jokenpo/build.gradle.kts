@@ -52,10 +52,14 @@ tasks.withType<KotlinCompile> {
 
 tasks.test {
     useJUnitPlatform()
+//	testLogging {
+//		events ("passed", "skipped", "failed")
+//	}
 }
 
 tasks.withType<Test> {
     this.testLogging {
         this.showStandardStreams = true
+		events ("passed", "failed")
     }
 }
